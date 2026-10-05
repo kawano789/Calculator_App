@@ -39,6 +39,7 @@ public class Calculator {
         System.out.println("演算記号（+, -, *, /）を入力してください。");
         operator = scanner.nextLine();
         operator = Normalizer.normalize(operator, Normalizer.Form.NFKC);
+        operator = operator.replace('ー', '-');
 
         if (operator.equals("+") ||
             operator.equals("-") ||
@@ -54,25 +55,25 @@ public class Calculator {
 
       try {
         switch (operator) {
-        case "+":
-          num3 = num1.add(num2);
-          break;
-        case "-":
-          num3 = num1.subtract(num2);
-          break;
-        case "*":
-          num3 = num1.multiply(num2);
-          break;
-        case "/":
-          num3 = num1.divide(num2, 10, RoundingMode.HALF_UP);
-          break;
-        default:
-          System.out.println("エラー");
-          continue;
-      }
+          case "+":
+            num3 = num1.add(num2);
+            break;
+          case "-":
+            num3 = num1.subtract(num2);
+            break;
+          case "*":
+            num3 = num1.multiply(num2);
+            break;
+          case "/":
+            num3 = num1.divide(num2, 3, RoundingMode.HALF_UP);
+            break;
+          default:
+            System.out.println("エラー");
+            continue;
+        }
 
-      System.out.println("答えは");
-      System.out.println(num3);
+        System.out.println("答えは");
+        System.out.println(num3);
 
       } catch (ArithmeticException e) {
         System.out.println("エラー:0で割れません");
@@ -85,7 +86,6 @@ public class Calculator {
       if (input.equals("q")) {
         break;
       }
-
     }
 
     scanner.close();

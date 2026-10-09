@@ -115,7 +115,62 @@ public class Calculator {
   }
 
   public static void Exc() {
-    System.out.println("為替モードのコード");
+    Scanner scanner = new Scanner(System.in);
+
+    while (true) {
+
+      String currency1;
+      while (true) {
+        System.out.println("(換算元)JPY、USD、EURから選択してください。");
+        currency1 = scanner.nextLine();
+        currency1 = Normalizer.normalize(currency1, Normalizer.Form.NFKC);
+        if (currency1.equals("JPY") ||
+            currency1.equals("USD") ||
+            currency1.equals("EUR")) {
+          break;
+        } else {
+          System.out.println("エラー：不正な値が入力されました");
+        }
+      }
+
+      BigDecimal amount;
+      while (true) {
+        System.out.println("金額を入力してください。");
+        String input = scanner.nextLine();
+        try {
+          input = Normalizer.normalize(input, Normalizer.Form.NFKC);
+          amount = new BigDecimal(input);
+          break;
+        } catch (NumberFormatException e) {
+          System.out.println("エラー：不正な値が入力されました");
+        }
+      }
+
+      String currency2;
+      while (true) {
+        System.out.println("(換算元)JPY、USD、EURから選択してください。");
+        currency2 = scanner.nextLine();
+        currency2 = Normalizer.normalize(currency2, Normalizer.Form.NFKC);
+        if (currency2.equals("JPY") ||
+            currency2.equals("USD") ||
+            currency2.equals("EUR")) {
+          break;
+        } else {
+          System.out.println("エラー：不正な値が入力されました");
+        }
+      }
+
+      System.out.println(currency1 + currency2 + amount);
+
+      System.out.println("エンターで続行、qでやめる");
+      String input = scanner.nextLine();
+
+      if (input.equals("q")) {
+        break;
+      }
+    }
+
+    scanner.close();
   }
 
 }

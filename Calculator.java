@@ -121,7 +121,7 @@ public class Calculator {
 
       String currency1;
       while (true) {
-        System.out.println("(換算元)JPY、USD、EURから選択してください。");
+        System.out.println("(変換元)JPY、USD、EURから選択してください。");
         currency1 = scanner.nextLine();
         currency1 = Normalizer.normalize(currency1, Normalizer.Form.NFKC);
         if (currency1.equals("JPY") ||
@@ -148,7 +148,7 @@ public class Calculator {
 
       String currency2;
       while (true) {
-        System.out.println("(換算元)JPY、USD、EURから選択してください。");
+        System.out.println("(変換先)JPY、USD、EURから選択してください。");
         currency2 = scanner.nextLine();
         currency2 = Normalizer.normalize(currency2, Normalizer.Form.NFKC);
         if (currency2.equals("JPY") ||
@@ -160,7 +160,40 @@ public class Calculator {
         }
       }
 
-      System.out.println(currency1 + currency2 + amount);
+      BigDecimal jpyRate = new BigDecimal("1");
+      BigDecimal usdRate = new BigDecimal("155");
+      BigDecimal eurRate = new BigDecimal("175");
+
+      BigDecimal fromRate;
+      BigDecimal toRate;
+
+      switch (currency1) {
+        case "JPY":
+          fromRate = jpyRate;
+          break;
+        case "USD":
+          fromRate = usdRate;
+          break;
+        default:
+          fromRate = eurRate;
+          break;
+      }
+
+      switch (currency2) {
+        case "JPY":
+          toRate = jpyRate;
+          break;
+        case "USD":
+          toRate = usdRate;
+          break;
+        default:
+          toRate = eurRate;
+          break;
+      }
+
+      BigDecimal result = amount.multiply(fromRate);
+      result = result.divide(toRate, 2, RoundingMode.HALF_UP);
+      System.out.println("結果:" + result + currency2);
 
       System.out.println("エンターで続行、qでやめる");
       String input = scanner.nextLine();

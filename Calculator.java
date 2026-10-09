@@ -140,6 +140,10 @@ public class Calculator {
         try {
           input = Normalizer.normalize(input, Normalizer.Form.NFKC);
           amount = new BigDecimal(input);
+          if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            System.out.println("エラー:0円以上の金額を入れて下さい");
+            continue;
+          }
           break;
         } catch (NumberFormatException e) {
           System.out.println("エラー：不正な値が入力されました");

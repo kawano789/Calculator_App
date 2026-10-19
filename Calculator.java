@@ -21,7 +21,7 @@ public class Calculator {
         Exc();
         break;
       } else {
-        System.out.println("エラー:再度入力して下さい");
+        System.out.println("不正な値が入力されました");
       }
     }
 
@@ -104,7 +104,7 @@ public class Calculator {
         continue;
       }
 
-      System.out.println("エンターで続行、qでやめる");
+      System.out.println("エンター:続行 q:終了");
       String input = scanner.nextLine();
 
       if (input.equals("q")) {
@@ -141,7 +141,7 @@ public class Calculator {
           input = Normalizer.normalize(input, Normalizer.Form.NFKC);
           amount = new BigDecimal(input);
           if (amount.compareTo(BigDecimal.ZERO) < 0) {
-            System.out.println("エラー:0円以上の金額を入れて下さい");
+            System.out.println("エラー:0以上の金額を入れて下さい");
             continue;
           }
           break;
@@ -199,7 +199,7 @@ public class Calculator {
       result = result.divide(toRate, 2, RoundingMode.HALF_UP);
       System.out.println("結果:" + result + currency2);
 
-      System.out.println("エンターで続行、qでやめる");
+      System.out.println("エンター:続行 q:終了");
       String input = scanner.nextLine();
 
       if (input.equals("q")) {
